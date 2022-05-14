@@ -14,16 +14,17 @@ class ViajeFeliz{
     private $cantMaxPers;
     private $objPersona;
     private $responsable;
+    private $categoriaAsiento;
 
     // Metodo contructor del objeto ViajeFelis
-    public function __construct($codViaje, $lugarDestino, $limitPers, $dataobjPersona)
+    public function __construct($codViaje, $lugarDestino, $limitPers, $dataobjPersona, $cateAsiento)
     {
         $this->codigo = $codViaje;
         $this->destino = $lugarDestino;
         $this->cantMaxPers = $limitPers;
         $this->objPersona = $dataobjPersona;
         $this->responsable;
-        
+        $this->categoriaAsiento = $cateAsiento;
     }
     
         // Implementamos los metodos de acceso a los atributos
@@ -44,7 +45,7 @@ class ViajeFeliz{
     {
         $this->codigo = $codigo;
 
-        return $this;
+        
     }
 
     /**
@@ -64,7 +65,7 @@ class ViajeFeliz{
     {
         $this->destino = $destino;
 
-        return $this;
+        
     }
 
     /**
@@ -84,7 +85,7 @@ class ViajeFeliz{
     {
         $this->cantMaxPers = $cantMaxPers;
 
-        return $this;
+        
     }
 
     /**
@@ -104,7 +105,7 @@ class ViajeFeliz{
     {
         $this->objPersona = $objPersona;
 
-        return $this;
+        
     }
 
     public function getResponsable()
@@ -115,7 +116,27 @@ class ViajeFeliz{
     public function setResponsable($responsable)
     {
         $this->responsable = $responsable;
-        return $this;
+        
+    }
+
+    /**
+     * Get the value of categoriaAsiento
+     */ 
+    public function getCategoriaAsiento()
+    {
+        return $this->categoriaAsiento;
+    }
+
+    /**
+     * Set the value of categoriaAsiento
+     *
+     * @return  self
+     */ 
+    public function setCategoriaAsiento($categoriaAsiento)
+    {
+        $this->categoriaAsiento = $categoriaAsiento;
+
+        
     }
 
     /**Metodo que nos retorna si la capacidad maxima de pasajeros ya llego a su limite
@@ -235,13 +256,15 @@ class ViajeFeliz{
 
     public function __toString()
     {
-        return "\nEl viaje (N° ".$this->getCodigo().") con destino a ".$this->getDestino()."\ncuenta con una capacidad de ".$this->getCantMaxPers(). " pasajeros como maximo \n"."El responsable del viaje es: ".$this->getResponsable()."\nLos que pasajeos que viajan son: \n";
+        return "\nEl viaje (N° ".$this->getCodigo().") con destino a ".$this->getDestino()."\ncuenta con una capacidad de ".$this->getCantMaxPers(). " pasajeros como maximo \n".$this->getResponsable()."\nLos que pasajeos que viajan son: \n";
     }
     
     public function __destruct()
     {
         echo "\nEl viaje se suspendio \n";
     }
+
+    
 }
 
 

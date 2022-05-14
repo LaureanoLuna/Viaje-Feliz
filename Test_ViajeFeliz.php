@@ -10,7 +10,7 @@ include ('Pasajero.php');
 $per = [new Pasajero("Laureano","Luna",38232325, 15),new Pasajero("Josefo","Giacone",26841599,16),new Pasajero("Margarita","Muñoz",16589633,17)];//objeto Persona ya creado
 
 
-$objViaje = new ViajeFeliz(3543,"Neuquen",3,$per); //Objeto viaje ya creado
+$objViaje = new ViajeFeliz(3543,"Neuquen",3,$per, true); //Objeto viaje ya creado
 $objViaje->AgregarResponsable(56,"FAI-3543", "Laureano","Luna");// Agregamos el objeto ResponsableV ya creado
 $i = 0;//Inicializamos la variable
 
@@ -115,7 +115,7 @@ switch ($opciones) {
         
     } while ($peppol == "si");
 
-    $objViaje = new ViajeFeliz($codViaje,$destino,$capacidadViaje,$objPersona);
+    $objViaje = new ViajeFeliz($codViaje,$destino,$capacidadViaje,$objPersona, false);
     $objViaje->AgregarResponsable($idEmpleado,$numLegajo,$nomEmpleado,$apellidoEmpleado);
        
        break;
