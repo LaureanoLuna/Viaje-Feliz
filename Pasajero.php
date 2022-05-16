@@ -6,6 +6,7 @@
 class Pasajero{
 
     private $persona;
+   
   
         /**Implementamos el metodo Constructor del objeto
          * @param string $nomPers
@@ -14,12 +15,13 @@ class Pasajero{
          * 
          */
 
-    public function __construct($nomPers, $apellidoPers, $dniPersona, $numTelefono)
+    public function __construct($nomPers, $apellidoPers, $dniPersona, $numTelefono,)
     {
         $this->persona["nombre"] = $nomPers;
         $this->persona["apellido"] = $apellidoPers;
         $this->persona["DNI"] = $dniPersona;
         $this->persona["Telefono"] = $numTelefono;
+        $this->objPasaje = null;
     }
 
         //Implementamos los metodos de acceso a los atributos
@@ -41,6 +43,25 @@ class Pasajero{
     public function setPersona($persona)
     {
       $this->persona = $persona;        
+    }
+
+     /**
+     * Get the value of objPasaje
+     */ 
+    public function getObjPasaje()
+    {
+        return $this->objPasaje;
+    }
+
+    /**
+     * Set the value of objPasaje
+     *
+     * @return  self
+     */ 
+    public function setObjPasaje($objPasaje)
+    {
+        $this->objPasaje = $objPasaje;
+      
     }
 
     /**
@@ -70,7 +91,7 @@ class Pasajero{
     /**Metodo implemetado para poder mostrar los datos de dicho objeto */
     public function __toString()
     {
-        return " Nombre: ".($this->getPersona()["nombre"])."\n Apellido: ".($this->getPersona()["apellido"]."\n Numero de DNI: ".($this->getPersona()["DNI"])."\nNumero de Telefono: ".($this->getPersona()["Telefono"]))."\n";
+        return " Nombre: ".($this->getPersona()["nombre"])."\n Apellido: ".($this->getPersona()["apellido"]."\n Numero de DNI: ".($this->getPersona()["DNI"])."\nNumero de Telefono: ".($this->getPersona()["Telefono"]))."\n". $this->getObjPasaje(). "\n";
     }
 
     /**Metodo implementado que retorna un mensaje en cuyo caso fallara la creacion del objeto */
@@ -80,5 +101,7 @@ class Pasajero{
     } 
 
 
+
+   
 }
 ?>

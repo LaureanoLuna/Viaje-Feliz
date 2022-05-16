@@ -14,17 +14,19 @@ class ViajeFeliz{
     private $cantMaxPers;
     private $objPersona;
     private $responsable;
-    private $categoriaAsiento;
+    private $objPasaje;
+    
 
     // Metodo contructor del objeto ViajeFelis
-    public function __construct($codViaje, $lugarDestino, $limitPers, $dataobjPersona, $cateAsiento)
+    public function __construct($codViaje, $lugarDestino, $limitPers)
     {
         $this->codigo = $codViaje;
         $this->destino = $lugarDestino;
         $this->cantMaxPers = $limitPers;
-        $this->objPersona = $dataobjPersona;
+        $this->objPersona;
         $this->responsable;
-        $this->categoriaAsiento = $cateAsiento;
+        $this->objPasaje;
+       
     }
     
         // Implementamos los metodos de acceso a los atributos
@@ -139,18 +141,37 @@ class ViajeFeliz{
         
     }
 
+      /**
+     * Get the value of objPasaje
+     */ 
+    public function getObjPasaje()
+    {
+        return $this->objPasaje;
+    }
+
+    /**
+     * Set the value of objPasaje
+     *
+     * @return  self
+     */ 
+    public function setObjPasaje($objPasaje)
+    {
+        $this->objPasaje = $objPasaje;   
+    }
+
+
     /**Metodo que nos retorna si la capacidad maxima de pasajeros ya llego a su limite
      * 
      * @return booleano $bool.
      */
 
-    public function estaLLeno()
+    public function hayPasajesDisponible()
     {
         $capacidadMax = $this->getCantMaxPers();
         $cantidadActualObjPersona = count($this->getObjPersona());
-        $bool = false;
+        $bool = true;
         if ($cantidadActualObjPersona == $capacidadMax){
-            $bool = true;
+            $bool = false;
         }
         return $bool;
     }
@@ -254,6 +275,18 @@ class ViajeFeliz{
         return $arrayReordenado; // retornamos el arreglo ordenado
     }
 
+    public function venderPasaje($objPasajero)
+    {
+       if ($this->hayPasajesDisponible())
+       {
+           $pasaje = $this->getObjPasaje();
+           $objPasajero->setObjPasaje($pasaje);
+           $costoPasaje = $pasaje->getCostoPasaje();
+       }
+       
+       return $costoPasaje;
+    }
+
     public function __toString()
     {
         return "\nEl viaje (N° ".$this->getCodigo().") con destino a ".$this->getDestino()."\ncuenta con una capacidad de ".$this->getCantMaxPers(). " pasajeros como maximo \n".$this->getResponsable()."\nLos que pasajeos que viajan son: \n";
@@ -265,6 +298,8 @@ class ViajeFeliz{
     }
 
     
+
+  
 }
 
 

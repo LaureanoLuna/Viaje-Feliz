@@ -7,10 +7,10 @@ include ('Pasajero.php');
 
 
 
-$per = [new Pasajero("Laureano","Luna",38232325, 15),new Pasajero("Josefo","Giacone",26841599,16),new Pasajero("Margarita","Muñoz",16589633,17)];//objeto Persona ya creado
+$per = [new Pasajero("Laureano","Luna",38232325, 15, new Pasaje("terrestre", "true", 2000)),new Pasajero("Josefo","Giacone",26841599,16, new Pasaje("aereo","primera Clase", 10000)),new Pasajero("Margarita","Muñoz",16589633,17)];//objeto Persona ya creado
 
 
-$objViaje = new ViajeFeliz(3543,"Neuquen",3,$per, true); //Objeto viaje ya creado
+$objViaje = new ViajeFeliz(3543,"Neuquen",3,$per); //Objeto viaje ya creado
 $objViaje->AgregarResponsable(56,"FAI-3543", "Laureano","Luna");// Agregamos el objeto ResponsableV ya creado
 $i = 0;//Inicializamos la variable
 
@@ -35,37 +35,31 @@ switch ($opciones) {
    case '1':
     echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
 
-    echo "\nDestino: ";
-    $destino = trim(fgets(STDIN));
-    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+    $destino = Interaccion("Ingrese el Destino");
+    
+    $codViaje = Interaccion("Codigo identificatorio de Viaje");
 
-    echo "\nCodigo identificatorio de viaje: ";
-    $codViaje = trim(fgets(STDIN));
-    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+    $capacidadViaje = Interaccion("Capacidad de pasajeros");
 
-    echo "\nCapacidad de pasajeros: ";
-    $capacidadViaje = trim(fgets(STDIN));
-    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+   
+    $objPasajero = datosPasajero();
+    $objResponsable = datosResponsable();
+    $objPasaje = datosPasaje($tipoViaje);
 
     echo "\nDatos del Empleado Resposanble del Viaje \n";
     echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-    echo "\nNombre: ";
-    $nomEmpleado = trim(fgets(STDIN));
+   
+    $nomEmpleado = Interaccion("Nombre");
+
+    $apellidoEmpleado = Interaccion("Apellido");
+   
+    $idEmpleado = Interaccion("Numero Identificatorio del Empleado Responsable");
+
+    $numLegajo =Interaccion("Numero de Legajo del Empleado");
+
     echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
 
-    echo "\nApellido: ";
-    $apellidoEmpleado = trim(fgets(STDIN));
     echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-    echo "\nNumero Identificatorio del Empleado Responsable: ";
-    $idEmpleado = trim(fgets(STDIN));
-    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-    echo "\nNumero de Legajo del Empleado Responsable: ";
-    $numLegajo = trim(fgets(STDIN));
-    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-    
 
     $p = 0;
 
@@ -75,28 +69,16 @@ switch ($opciones) {
     do {
         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
 
-        echo "\nNombre: ";        
-        $nomPasajero = trim(fgets(STDIN));
+        $nomPasajero =Interaccion("Nombre");
 
-        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+        $apellidoPasajero =Interaccion("Apellido");
 
-        echo "\nApellido: ";        
-        $apellidoPasajero = trim(fgets(STDIN));
-
-        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-        echo "\nNumero de DNI: ";        
-        $dniPasajero = trim(fgets(STDIN));
-
-        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-        echo "\nNumero de Telefono: ";        
-        $numTelefono = trim(fgets(STDIN));
-
-        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+        $dniPasajero =Interaccion("Numero de DNI");
+  
+        $numTelefono =Interaccion("Numero de Telefono");
 
         if ($objViaje->VerificacionPersona($dniPasajero)){
-            $objPersona[$p]=new Pasajero($nomPasajero, $apellidoPasajero, $dniPasajero, $numTelefono);
+            $objPersona[$p]=new Pasajero($nomPasajero, $apellidoPasajero, $dniPasajero, $numTelefono,$objPasaje);
         }else{
             echo "\nEl pasajero ya fue ingresado al viaje\n";
         }
@@ -115,7 +97,7 @@ switch ($opciones) {
         
     } while ($peppol == "si");
 
-    $objViaje = new ViajeFeliz($codViaje,$destino,$capacidadViaje,$objPersona, false);
+    $objViaje = new ViajeFeliz($codViaje,$destino,$capacidadViaje);
     $objViaje->AgregarResponsable($idEmpleado,$numLegajo,$nomEmpleado,$apellidoEmpleado);
        
        break;
@@ -150,45 +132,29 @@ switch ($opciones) {
                 
             switch ($opc) {
                 case '1':
-                   if ($objViaje->estaLLeno()) {
-    
-                    echo "\nLa capacidad maxima de pasajeros, ya se completo \n";
-                       
-                   }else{
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                   if ($objViaje->hayPasajesDisponible()) {
+                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                    
+                        $nomPasajeroNuevo = Interaccion("Nombre");
+                
+                        $apellidoPasajeroNuevo = Interaccion("Apellido");
+            
+                        $dniPasajeroNuevo = Interaccion("Numero de DNI");
+                    
+                        $numPasajeroTelefono = Interaccion("Numero de Telefono");
+        
+                        if ($objViaje->VerificacionPersona($dniPasajeroNuevo)){
 
-                    echo "\nNombre: ";                    
-                    $nomPasajeroNuevo = trim(fgets(STDIN));
+                            $objViaje->AgregrarObjPersona($nomPasajeroNuevo,$apellidoPasajeroNuevo,$dniPasajeroNuevo, $numPasajeroTelefono);
+                            echo "\nEl pasajero fue agregado con exito\n";
+                        }else{
 
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                    echo "\nApellido: ";                    
-                    $apellidoPasajeroNuevo = trim(fgets(STDIN));
-
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                    echo "\nNumero de DNI: ";                   
-                    $dniPasajeroNuevo = trim(fgets(STDIN));
-
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                    echo "\nNumero de Telefono: ";                   
-                    $numPasajeroTelefono = trim(fgets(STDIN));
-
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-    
-                    if ($objViaje->VerificacionPersona($dniPasajeroNuevo)){
-
-                        $objViaje->AgregrarObjPersona($nomPasajeroNuevo,$apellidoPasajeroNuevo,$dniPasajeroNuevo, $numPasajeroTelefono);
-                        echo "\nEl pasajero fue agregado con exito\n";
+                            echo "\nEl pasajero ya fue ingresado\n";
+                            
+                        }
                     }else{
-
-                        echo "\nEl pasajero ya fue ingresado\n";
-                        
+                    echo "\nLa capacidad maxima de pasajeros, ya se completo \n";
                     }
-
-                   
-                   }
     
                    break;
                 case '2':       
@@ -210,18 +176,11 @@ switch ($opciones) {
                                 {
                                     case '1':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                                        echo "\nIndique el numero del pasajero ";                            
-                                        $numPasajero =trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                                        echo "\nIngrese el nuevo nombre ";                            
-                                        $nuevoNombre = trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                          
+                                        $numPasajero = Interaccion("Indique el numero del pasajero");
+                           
+                                        $nuevoNombre = Interaccion("Ingrese el nuevo Nombre");
                 
-                                             
                                         $objPasajero = $objViaje->getObjPersona()[$numPasajero - 1]; 
 
                                         if($objPasajero->CambiarDatos("nombre",$nuevoNombre)){
@@ -231,16 +190,11 @@ switch ($opciones) {
                                         break;
                                     case '2':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                          
+                                        $numPasajero = Interaccion("Indique el numero del pasajero");
+                        
+                                        $nuevoApellido =Interaccion("Ingrese el nuevo Apellido");
 
-                                        echo "\nIndique el numero del pasajero ";                            
-                                        $numPasajero =trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        echo "\nIngrese el nuevo apellido ";                           
-                                        $nuevoApellido = trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        
                                         $objPasajero = $objViaje->getObjPersona()[$numPasajero - 1]; 
 
                                         if($objPasajero->CambiarDatos("apellido",$nuevoApellido)){
@@ -251,16 +205,10 @@ switch ($opciones) {
                                         break;
                                     case '3':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                      
+                                        $numPasajero = Interaccion("Indique el numero del pasajero");
 
-                                        echo "\nIndique el numero del pasajero \n";                            
-                                        $numPasajero =trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                                        echo "\nIngrese el nuevo numero de DNI \n";                            
-                                        $nuevoDNI = trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                                        $nuevoDNI = Interaccion("Ingrese el nuevo numero de DNI");
                 
                                         $objPasajero = $objViaje->getObjPersona()[$numPasajero - 1]; 
 
@@ -272,16 +220,10 @@ switch ($opciones) {
                                     
                                     case '4':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                                        echo "\nIndique el numero del pasajero \n";                            
-                                        $numPasajero =trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-
-                                        echo "\nIngrese el nuevo numero de Telefono \n";                            
-                                        $nuevoPhonePasajero = trim(fgets(STDIN));
-
-                                        echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                      
+                                        $numPasajero = Interaccion("Indique el numero del pasajero");
+                           
+                                        $nuevoPhonePasajero = Interaccion("Ingrese el nuevo numero de Telefono");
                 
                                         $objPasajero = $objViaje->getObjPersona()[$numPasajero - 1]; 
 
@@ -346,24 +288,21 @@ switch ($opciones) {
                                 switch ($opcEmpleadoResponsable) {
                                     case '1':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        echo "\nIngrese el nuevo nombre: ";                            
-                                        $newNombre = trim(fgets(STDIN));
+                                        $newNombre =Interaccion("Ingrese el nuevo Nombre");
 
                                         $obj =$objViaje->getResponsable();
                                         $obj->setNombre($newNombre);
                                         break;
                                     case '2':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        echo "\nIngrese el nuevo apellido: ";                            
-                                        $newApellido = trim(fgets(STDIN));
+                                        $newApellido =Interaccion("Ingrese el nuevo Apellido");
 
                                         $obj =$objViaje->getResponsable();
                                         $obj->setApellido($newApellido);
                                         break;
                                     case '3':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        echo "\nIngrese el dato del Legajo: ";                            
-                                        $newLegajo = trim(fgets(STDIN));
+                                        $newLegajo =Interaccion("Ingrese el dato del Legajo");
 
                                         $obj =$objViaje->getResponsable();
                                         $obj->setNumLegajo($newLegajo);
@@ -371,8 +310,7 @@ switch ($opciones) {
                                         break;
                                     case '4':
                                         echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                        echo "\nIngrese el dato del Identificacion: ";                            
-                                        $newidEmpleado = trim(fgets(STDIN));
+                                        $newidEmpleado =Interaccion("Ingrese el dato de Identificacion");
 
                                         $obj =$objViaje->getResponsable();
                                         $obj->setIdEmpleado($newLegajo);
@@ -391,23 +329,15 @@ switch ($opciones) {
                     break;
                 case '5':
                     echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                    
-                    echo "\nIngrese el nuevo destino del viaje  ";                   
-                    $nuevoDestino = trim(fgets(STDIN));
-
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                    $nuevoDestino = Interaccion("Ingrese el nuevo destiono del viaje");
                     
                     $objViaje->setDestino($nuevoDestino);
 
                     break;
                     
                 case '6':
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                    
-                    echo "\nIngrese la nueva capacidad de pasajeros del viaje ";                    
-                    $nuevaCapacidad = trim(fgets(STDIN));
-                    
-                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";    
+                    $nuevaCapacidad = Interaccion("Ingrese la nueva capacidad de pasajeros");
 
                     $objViaje->setCantMaxPers($nuevaCapacidad);
 
@@ -464,6 +394,126 @@ switch ($opciones) {
         break;
 }
 } while ($opciones < 6);
+
+
+function Interaccion($tipoSolicitud)
+{
+                       
+    echo "\n".$tipoSolicitud . ": ";                   
+    $valorRetorno = trim(fgets(STDIN));
+    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+    return $valorRetorno;
+}
+
+function TipoViaje()
+{
+    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+    echo "\n Elelija el modo de viajar a Destino: \n";
+    echo "1) Por medio Terrestre \n";
+    echo "2) Por medio Aereo \n";
+    $eleccion = trim(fgets(STDIN));
+
+    return $eleccion;
+}
+
+function datosPasajero()
+    {
+            echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+            echo "\nIngresar los datos de los Pasajeros\n";
+            echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+
+            $nomPasajero =Interaccion("Nombre");
+
+            $apellidoPasajero =Interaccion("Apellido");
+
+            $dniPasajero =Interaccion("Numero de DNI");
+        
+            $numTelefono =Interaccion("Numero de Telefono");
+            echo "\n¿ Desea Ingresar otro pasajero ?\n";
+            
+            $objPasajero = new Pasajero($nomPasajero,$apellidoPasajero, $dniPasajero, $numTelefono);
+
+        return $objPasajero;
+    }
+
+function datosResponsable()
+    {       
+            echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+            echo "\nDatos del Empleado Resposanble del Viaje \n";
+            echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+        
+            $nomEmpleado = Interaccion("Nombre");
+
+            $apellidoEmpleado = Interaccion("Apellido");
+        
+            $idEmpleado = Interaccion("Numero Identificatorio del Empleado Responsable");
+
+            $numLegajo =Interaccion("Numero de Legajo del Empleado");
+
+            echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+
+            $objResponsable = new ResponsableV($idEmpleado,$numLegajo,$nomEmpleado,$apellidoEmpleado);
+
+        return $objResponsable;
+    }
+
+    function datosPasaje($tipoViaje)
+    {
+       $costoPasaje = Interaccion("Ingrese el valor del Pasaje");
+       $tipoAsiento = Interaccion("Ingrese el tipo de Asiento");
+       $pasajeIda = Interaccion("Ingrese si el Pasaje es: \n 1)Ida \n 2)Ida y Vuelta");
+       $objPasaje = new Pasaje($tipoViaje, $costoPasaje);
+       $objPasaje->setTipo_Viaje($tipoViaje);
+       if ($pasajeIda == 2)
+       {
+            $objPasaje->setPasajeSoloIda(true);
+       }
+       
+       if ($tipoAsiento == "Semi Cama" || $tipoAsiento == "Primera Clase")
+       {
+           $objPasaje->setTipo_Asiento(true);
+       }
+
+       return $objPasaje;
+    }
+
+   
+    function CompletamosViaje ($objViaje,$objResponsable, $objPasajero, $objPasaje)
+    {
+       $objViaje->setObjPersona($objPasajero);
+       $objViaje->setResponsable($objResponsable);
+       $objViaje->setObjPasaje($objPasaje);
+    }
+
+    
+    $viaje = TipoViaje();
+    switch ($viaje) {
+        case '1':
+
+                echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
+
+                $destino = Interaccion("Ingrese el Destino");
+                
+                $codViaje = Interaccion("Codigo identificatorio de Viaje");
+
+                $capacidadViaje = Interaccion("Capacidad de pasajeros");
+
+                echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";  
+
+                $objViajeTerrestre = new ViajeTerrestre($cosViaje, $destino, $capacidadViaje);
+                $objPasajero = datosPasajero();
+                $objResponsable = datosResponsable();
+                $objPasaje = datosPasaje("Terrestre");
+                CompletamosViaje($objViajeTerrestre,$objResponsable,$objPasajero,$objPasaje);
+
+                $objViajeTerrestre->venderPasaje($objPasajero);
+            
+            break;
+        
+        default:
+            # code...
+            break;
+    }
 
 
 
