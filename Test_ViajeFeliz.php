@@ -8,23 +8,33 @@ include('ResponsableV.php');
 include ('Pasajero.php');
 
 
+// Obj Pasaje para el objto Viaje Aereo
+$pasajeAereo = new Pasaje("Aereo", 1500); //Inicializamos el Objeto Pasaje
+$pasajeAereo-> setPasajeSoloIda(true);// setteamos Si el pasaje es de ida y Vuelta. como ejemplo
 
-$pasajeAereo = new Pasaje("Aereo", 1500);
-$pasajeAereo-> setPasajeSoloIda(true);
+//Obj Pasaje para el objto Viaje Terrestre
 $pasajeTerrestre = new Pasaje("Terrestre", 1500);
+
+//Obj Pasajero
 $per = [new Pasajero("Laureano","Luna",38232325, 15),new Pasajero("Josefo","Giacone",26841599,10000),new Pasajero("Margarita","Muñoz",16589633,17)];//objeto Persona ya creado
-$per[0]->setObjPasaje($pasajeAereo);
-$per[1]->setObjPasaje($pasajeAereo);
-$per[2]->setObjPasaje($pasajeTerrestre);
+$per[0]->setObjPasaje($pasajeAereo);// le setteamos la referencia del objto Pasaje en el objto Pasajero
+$per[1]->setObjPasaje($pasajeAereo);// le setteamos la referencia del objto Pasaje en el objto Pasajero
+$per[2]->setObjPasaje($pasajeTerrestre);// le setteamos la referencia del objto Pasaje en el objto Pasajero
+
+//Inicializamos el objto Viaje Aereo
 $objViajeAereo = new ViajeAereo(3543,"Neuquen",3,"Fly",10);
-$objViajeAereo->setObjPersona($per);
-/* $objViajeAereo->setObjPersona($per[1]); */
-$objViajeAereo->setObjPasaje($pasajeAereo);
+$objViajeAereo->setObjPersona($per); // setteamos la referencia al objeto Pasajero
+$objViajeAereo->setObjPasaje($pasajeAereo);// setteamos la referencia al objeto Pasaje
+
+//Inicializamos el objto Viaje Aereo
 $objViajeTerrestre = new ViajeTerrestre(3543,"Neuquen",3); //Objeto viaje ya creado
-$objViajeTerrestre->setObjPersona($per);
-/* $objViajeTerrestre->setObjPasaje($pasajeTerrestre); */
+$objViajeTerrestre->setObjPersona($per);// setteamos la referencia al objeto Pasajero
+$objViajeTerrestre->setObjPasaje($pasajeTerrestre);// setteamos la referencia al objeto Pasaje
+ 
+// setteamos la referencia al obj Responsable por medio de un metodo en el objeto Viaje Padre
 $objViajeTerrestre->AgregarResponsable(56,"FAI-3543", "Laureano","Luna");// Agregamos el objeto ResponsableV ya creado
-$objViajeAereo->AgregarResponsable(56,"FAI-3543", "Laureano","Luna");
+$objViajeAereo->AgregarResponsable(56,"FAI-3543", "Laureano","Luna");// Agregamos el objeto ResponsableV ya creado
+
 $i = 0;//Inicializamos la variable
 
 //Programa principal
@@ -48,7 +58,7 @@ do {
 switch ($opciones) {
    case '1':
 
-            $difViaje = TipoViaje();
+            $difViaje = TipoViaje()."\n3)Salir";
 
             switch ($difViaje) {
             
@@ -83,35 +93,7 @@ switch ($opciones) {
                                 
                                 $objViaje->AgregarResponsable($idEmpleado,$numLegajo,$nomEmpleado,$apellidoEmpleado);
                         
-                        /*  do {
-                                // Generamos el obj Pasajero y el Objeto Pasaje
-                                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                    
-                                            $objPasaje = datosPasaje("Terrestre");
-                                            $objViaje->setObjPasaje($objPasaje);
-                                            $objPasajero = datosPasajero();
-
-                                            if($objViaje->VerificacionPersona($objPasajero->getPersona()["DNI"]) || $objViaje->getObjPersona() == null){
-
-                                                if ($objViaje-> hayPasajesDisponible() || $objViaje-> hayPasajesDisponible() == null ){ 
-
-                                                    echo "llega";
-
-                                                    $objViaje->venderPasaje($objPasajero);
-                                                    echo $objViaje;
                         
-                                                }else
-                                                    {
-                                                        echo "\nNo hay pasajes disponibles. \n";
-                                                    }
-                                            }else{
-                                                echo "\nEl pasajero ya fue ingresado al viaje\n";
-                                            }
-                                        
-                                    echo "\n¿ Desea Ingresar otro pasajero ?\n";
-                                    $peppol = trim(fgets(STDIN));
-                                            
-                            } while ($peppol == "si"); */
                             
                             $objViajeTerrestre = $objViaje;
                         break;
@@ -148,51 +130,11 @@ switch ($opciones) {
                                 
                                 $objViaje->AgregarResponsable($idEmpleado,$numLegajo,$nomEmpleado,$apellidoEmpleado);
                         
-                        /*  do {
-                                // Generamos el obj Pasajero y el Objeto Pasaje
-                                    echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                
-                                            $objPasaje = datosPasaje("Aereo");
-                                            $objViaje->setObjPasaje($objPasaje);
-                                            $objPasajero = datosPasajero();
-
-                                            if($objViaje->VerificacionPersona($objPasajero->getPersona()["DNI"]) || $objViaje->getObjPersona() == null){
-
-                                                if ($objViaje-> hayPasajesDisponible() || $objViaje-> hayPasajesDisponible() == null ){ 
-
-                                                    echo "llega";
-
-                                                    $objViaje->venderPasaje($objPasajero);
-                                                    echo $objViaje;
-                        
-                                                }else
-                                                    {
-                                                        echo "\nNo hay pasajes disponibles. \n";
-                                                    }
-                                            }else{
-                                                echo "\nEl pasajero ya fue ingresado al viaje\n";
-                                            }
-                                        
-                                    echo "\n¿ Desea Ingresar otro pasajero ?\n";
-                                    $peppol = trim(fgets(STDIN));
-                                            
-                            } while ($peppol == "si"); */
-
-                        /*   echo $objViaje;
-                            $x = $objViaje->getObjPersona();
-                            $i = 1;
-                            foreach ($x as $key => $value) {
-                                echo $i.")".$value;
-                                echo "\n○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•○•\n";
-                                $i++;
-                            }
-
-                            $objViajeAereo = $objViaje;
-                                                */
+                       
 
                         break;
                         case'3':
-                            $difViaje = 4;
+                          
 
                             default:
                             echo "Ingrese una opcion correcta\n";
