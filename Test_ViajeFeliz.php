@@ -58,7 +58,7 @@ do {
 switch ($opciones) {
    case '1':
 
-            $difViaje = TipoViaje()."\n3)Salir";
+            $difViaje = TipoViaje();
 
             switch ($difViaje) {
             
