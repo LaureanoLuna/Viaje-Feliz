@@ -159,6 +159,7 @@ class ViajeFeliz{
         $this->objPasaje = $objPasaje;   
     }
 
+  
 
     /**Metodo que nos retorna si la capacidad maxima de pasajeros ya llego a su limite
      * 
@@ -167,12 +168,15 @@ class ViajeFeliz{
 
     public function hayPasajesDisponible()
     {
-        $capacidadMax = $this->getCantMaxPers();
-        $cantidadActualObjPersona = count($this->getObjPersona());
         $bool = true;
-        if ($cantidadActualObjPersona == $capacidadMax){
-            $bool = false;
+        if ($this->getObjPersona() <> null){
+
+            if (count($this->getObjPersona()) == $this->getCantMaxPers()){
+
+                $bool = false;
+            }
         }
+
         return $bool;
     }
 
@@ -236,18 +240,17 @@ class ViajeFeliz{
         
         $validacion = true;
         
-        foreach ($objPersona as $key => $value) {
-            
-            $persona = ($value->getPersona()["DNI"]);
-            
-            if ($persona == $dniPersona){
-    
-               return false;
-            }
-    
+        if ($objPersona <> null){
+            foreach ($objPersona as $key => $value) {
                 
-           
-              
+                $persona = ($value->getPersona()["DNI"]);
+                
+                if ($persona == $dniPersona){
+        
+                return false;
+                }  
+   
+            }
         }     
 
         return $validacion;
@@ -277,14 +280,16 @@ class ViajeFeliz{
 
     public function venderPasaje($objPasajero)
     {
-       if ($this->hayPasajesDisponible())
-       {
-           $pasaje = $this->getObjPasaje();
-           $objPasajero->setObjPasaje($pasaje);
-           $costoPasaje = $pasaje->getCostoPasaje();
-       }
+        
+        $objPasajero->setObjPasaje($this->getObjPasaje());
+        $pasajero =$this->getObjPersona();
+        $pasajero[] = $objPasajero;
+        $this->setObjPersona($pasajero);
+        $pasaje = $this->getObjPasaje();
+                     
+        $costoPasaje = $pasaje->getCostoPasaje();
        
-       return $costoPasaje;
+        return $costoPasaje;
     }
 
     public function __toString()

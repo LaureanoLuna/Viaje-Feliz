@@ -34,7 +34,7 @@ class ViajeTerrestre extends ViajeFeliz{
             $valorAsiento *= 1.50;
             $objPasaje->setCostoPasaje($valorAsiento);
         }
-        parent::venderPasaje($objPasaje);
+        parent::venderPasaje($objPasajero);
         return $valorAsiento;
     }
 
